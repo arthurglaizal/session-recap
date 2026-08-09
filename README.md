@@ -1,74 +1,80 @@
 # Session Recap
 
-> **Récapitule ta session Claude Code d'un coup d'œil.**
+> **Recap your Claude Code session at a glance.**
 
-Session Recap est une commande slash minimale pour Claude Code qui génère un récapitulatif lisible de la session de travail en cours : ce qui a été fait, dans quel ordre, où en est le projet, et quoi reprendre la prochaine fois.
+Session Recap is a minimal slash command for Claude Code that generates a readable recap of the current work session: what was done, in what order, where the project stands, and what to pick up next time.
 
-## Pourquoi ?
+## Why?
 
-Une session Claude Code peut vite s'étaler sur plusieurs chantiers, corrections et décisions. Sans récap, il est facile de perdre le fil : qu'est-ce qui a été fait, dans quel ordre, qu'est-ce qui reste ouvert.
+A Claude Code session can quickly spread across several threads, fixes, and decisions. Without a recap, it is easy to lose track: what was done, in what order, what is still open.
 
-Session Recap relit la conversation en cours et produit un compte rendu structuré, pour reprendre le travail rapidement — dans la session actuelle ou la suivante.
+Session Recap reads back the current conversation and produces a structured summary, so you can pick the work back up quickly, in the current session or the next one.
 
-## Utile pour
+## Good for
 
-Session Recap est utile quand tu veux :
+Session Recap is useful when you want to:
 
-* Revoir rapidement ce qui a été fait pendant une session.
-* Comprendre le déroulé chronologique d'une session longue.
-* Savoir clairement où en est le projet à l'instant T.
-* Identifier quoi reprendre à la prochaine session.
+* Quickly review what was done during a session.
+* Understand the chronological flow of a long session.
+* Know clearly where the project stands right now.
+* Identify what to pick up in the next session.
 
-## Comment l'utiliser
+## How to use it
 
-Dans une session Claude Code, tape :
+In a Claude Code session, type:
 
 ```txt
 /session-recap
 ```
 
-## Ce que fait la commande
+## What the command does
 
-La commande couvre le travail effectué depuis le dernier récap généré dans la conversation, ou à défaut depuis le début de la conversation. Elle ne résume pas tout l'historique du projet, et n'invente ni actions, ni décisions, ni horodatages.
+The command covers the work done since the last recap generated in the conversation, or otherwise since the start of the conversation. It does not summarize the full project history, and it does not invent actions, decisions, or timestamps.
 
-Elle produit quatre sections :
+It produces four sections:
 
-* **Résumé de la session** — deux phrases de vue d'ensemble.
-* **Déroulé de la session** — un tableau chronologique par sujet, avec horodatage.
-* **Où en est le projet ?** — un tableau `✅ En place` / `🚧 À poursuivre` / `❓ À décider`.
-* **👉 Prochaine étape** — une seule phrase sur l'action la plus logique à entreprendre ensuite.
+* **Session Summary**: two sentences giving an overview.
+* **Session Timeline**: a chronological table by topic, with timestamps.
+* **Where the project stands**: a `✅ Done` / `🚧 In progress` / `❓ Open questions` table.
+* **👉 Next step**: a single sentence on the most logical action to take next.
 
-Pour une session longue, le récap regroupe les actions liées en sujets significatifs plutôt que de tout journaliser : les commandes triviales, explorations sans conséquence et tentatives abandonnées sans impact sont ignorées.
+For a long session, the recap groups related actions into meaningful topics instead of logging everything: trivial commands, inconsequential exploration, and abandoned attempts with no impact are ignored.
+
+## How is this different from `/recap`?
+
+Claude Code's built-in `/recap` gives a brief summary when you return to a session.
+
+Session Recap goes deeper: a full chronological breakdown, a project status table, and a next step, always in the same four sections.
 
 ## Limitations
 
-Session Recap ne modifie aucun fichier du projet : elle produit uniquement un texte récapitulatif.
+Session Recap does not modify any project file: it only produces recap text.
 
-Le récap est fondé uniquement sur le contexte réellement disponible dans la conversation Claude Code en cours. Il ne connaît pas les sessions passées qui ne font pas partie du contexte actuel, et n'invente jamais d'horodatage qu'il ne peut pas déterminer de façon fiable.
+The recap is based solely on the context actually available in the current Claude Code conversation. It has no knowledge of past sessions that are not part of the current context, and it never invents a timestamp it cannot determine reliably.
 
-## Installer dans Claude Code
+## Install in Claude Code
 
-### Méthode 1 : copier le fichier de commande
+### Method 1: copy the command file
 
-Copie [session-recap.md](.claude/commands/session-recap.md) dans le dossier `.claude/commands/` de ton projet.
+Copy [session-recap.md](.claude/commands/session-recap.md) into your project's `.claude/commands/` folder.
 
-### Méthode 2 : installation via Claude Code
+### Method 2: install using Claude Code
 
-Tu peux demander à Claude Code de faire l'installation à ta place. Colle ce prompt dans une session Claude Code :
+You can ask Claude Code to handle the installation for you. Paste this prompt in a Claude Code session:
 
 [install-session-recap-for-claude-code.md](prompts-for-installation/install-session-recap-for-claude-code.md)
 
-## Utiliser dans un chat IA classique (ChatGPT, Claude, Gemini…)
+## Use in a regular AI chat (ChatGPT, Claude, Gemini...)
 
-Si tu veux juste utiliser Session Recap dans un chat classique, sans l'installer dans un projet ou un outil de code, colle cette version dans une conversation :
+If you just want to use Session Recap in a regular chat, without installing it in a project or a coding tool, paste this version into a conversation:
 
 [session-recap-ai-chat-version.md](prompts-for-ai-chat/session-recap-ai-chat-version.md)
 
-Une fois collée, écris exactement `recap` à tout moment de la conversation pour obtenir le récapitulatif de la session en cours. Tu peux le redemander plusieurs fois : chaque récap ne couvre que ce qui s'est passé depuis le précédent.
+Once pasted, write exactly `recap` at any point in the conversation to get a recap of the current session. You can ask for it several times: each recap only covers what happened since the previous one.
 
-Cette instruction ne s'applique qu'à la conversation en cours. Si tu ouvres une nouvelle conversation, colle-la à nouveau.
+This instruction only applies to the current conversation. If you open a new conversation, paste it again.
 
-## Structure du dépôt
+## Repository structure
 
 ```txt
 session-recap/
