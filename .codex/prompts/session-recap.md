@@ -18,12 +18,14 @@ Produce exactly these sections, in this order, in Markdown.
 
 **`Session Summary`**: exactly 2 sentences giving an overview: the main threads of work, the most important changes or decisions, and the overall state reached by the end of the session.
 
-**`Session Timeline`**: a Markdown table `| # | Topic | What was done | Time |`, in chronological order, one row per meaningful topic (about 8 to 12 for a long session), each topic titled in **bold**, with short bullet points separated by `<br>` in `What was done`, and the topic's start time in *italics* as `HH:MM` in the last column. Never invent a time; leave the cell empty if it cannot be determined reliably.
+**`Session Timeline`**: a Markdown table `| # | Topic | What was done | Time |`, in chronological order, one row per meaningful topic (about 8 to 12 for a long session), each topic titled in **bold**, with short bullet points in `What was done` each prefixed with `• ` and kept on a single line, and the topic's start time in *italics* as `HH:MM` in the last column. Never invent a time; leave the cell empty if it cannot be determined reliably.
 
-**`Where the project stands`**: a Markdown table `| Status | State |` with exactly three rows, `✅ **Done**`, `🚧 **In progress**`, `❓ **Open questions**`, each with short bullet points separated by `<br>` in the `State` cell. Use `—` instead of inventing content for a category that is not relevant.
+**`Where the project stands`**: a Markdown table `| Status | State |` with exactly three rows, `✅ **Done**`, `🚧 **In progress**`, `❓ **Open questions**`, each with short bullet points in the `State` cell, prefixed with `• ` and kept on a single line. Use `—` instead of inventing content for a category that is not relevant.
 
 **`👉 Next step`**: outside the table, exactly one line, `👉 **Next step**: ...`, a single sentence on the most logical action to take immediately next.
 
 Reply in the language used in the conversation, translating the section headers and labels accordingly.
+
+Never use HTML tags such as `<br>` anywhere in the output: they are not rendered in the terminal and show up as raw text. A table cell must stay on a single line, with `• ` as the only bullet separator.
 
 Do not modify any project file, and do not propose an action plan or task list beyond `Next step`.

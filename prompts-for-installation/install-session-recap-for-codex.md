@@ -57,7 +57,7 @@ Rules:
 * start a new topic when a workstream, goal, or significant phase changes;
 * adapt the number of rows to the actual density of the session; for a very long session, aim for about 8 to 12 meaningful topics;
 * give each topic a short **bold** title;
-* use several short bullet points in `What was done` when a topic covers multiple important actions, separated by `<br>`;
+* use several short bullet points in `What was done` when a topic covers multiple important actions, each prefixed with `• ` and kept on a single line;
 * each bullet describes a concrete action, decision, fix, or result; avoid repetition;
 * put the timestamp in the last column, in *italics*, in `HH:MM` format, corresponding to the start of the topic block;
 * never invent a time if it cannot be determined reliably from the context; in that case, leave the cell empty rather than guessing.
@@ -70,7 +70,7 @@ Markdown table with the columns `Status | State` and exactly these three rows, i
 * `🚧 **In progress**`: what has been identified but is still incomplete;
 * `❓ **Open questions**`: questions, trade-offs, or choices still open.
 
-In each `State` cell, use short bullet points separated by `<br>`. Only mention items that are actually relevant at the end of the session. Do not artificially fill a category if it is not relevant; use `—` instead of inventing content.
+In each `State` cell, use short bullet points, each prefixed with `• ` and kept on a single line. Only mention items that are actually relevant at the end of the session. Do not artificially fill a category if it is not relevant; use `—` instead of inventing content.
 
 ### `👉 Next step`
 
@@ -88,6 +88,7 @@ Reply in the language the user is using in the conversation, translating the sec
 
 * Do not modify any project file: this skill only produces recap text.
 * Do not propose an action plan or task list beyond `Next step`.
+* Never use HTML tags such as `<br>` anywhere in the output: they are not rendered in the terminal and show up as raw text. A table cell must stay on a single line, with `• ` as the only bullet separator.
 * Stay concise and directly readable in the terminal.
 ````
 

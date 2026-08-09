@@ -30,7 +30,7 @@ Rules:
 * start a new topic when the thread, goal, or phase changes significantly;
 * adapt the number of rows to the actual density of the session; for a long session, aim for about 8 to 12 meaningful topics;
 * give each topic a short **bold** title;
-* use several short bullet points in `What was done` when a topic covers multiple important items, separated by `<br>`;
+* use several short bullet points in `What was done` when a topic covers multiple important items, each prefixed with `• ` and kept on a single line;
 * each bullet describes a concrete action, decision, fix, or result; avoid repetition;
 * put the timestamp in the last column, in *italics*, in `HH:MM` format, corresponding to the start of the topic block, only if you can determine it reliably from the conversation.
 
@@ -42,7 +42,7 @@ Markdown table with the columns `Status | State` and exactly these three rows, i
 * `🚧 **In progress**`: what has been identified but is still incomplete;
 * `❓ **Open questions**`: questions, trade-offs, or choices still open.
 
-In each `State` cell, use short bullet points separated by `<br>`. Only mention items that are actually relevant at this stage. Do not artificially fill a category if it is not relevant; use `—` instead of inventing content.
+In each `State` cell, use short bullet points, each prefixed with `• ` and kept on a single line. Only mention items that are actually relevant at this stage. Do not artificially fill a category if it is not relevant; use `—` instead of inventing content.
 
 ### `👉 Next step`
 
@@ -65,5 +65,6 @@ Reply in the language I use in the conversation, translating the section headers
 ## Constraints
 
 * Do not propose an action plan or task list beyond `Next step`.
+* Never use HTML tags such as `<br>` anywhere in the output: they are not rendered everywhere and can show up as raw text. A table cell must stay on a single line, with `• ` as the only bullet separator.
 * Stay concise and directly readable in the chat.
 * This instruction only applies to the current conversation. If I start a new conversation and want the same behavior, I need to paste it again.
