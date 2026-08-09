@@ -1,0 +1,6 @@
+interface:
+  display_name: "Session Recap"
+  short_description: "Recap the current work session in a consistent format."
+  default_prompt: "Use $session-recap to recap what happened in this session so far."
+policy:
+  allow_implicit_invocation: false

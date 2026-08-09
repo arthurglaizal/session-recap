@@ -1,12 +1,16 @@
+![Session Recap](public/session-recap.gif)
+
 # Session Recap
 
-> **Recap your Claude Code session at a glance.**
+> **Recap your AI coding session at a glance.**
 
-Session Recap is a minimal slash command for Claude Code that generates a readable recap of the current work session: what was done, in what order, where the project stands, and what to pick up next time.
+Session Recap is a minimal reusable command that generates a readable recap of the current work session: what was done, in what order, where the project stands, and what to pick up next time.
+
+It works in Claude Code, in Codex, in other AI coding assistants, and in regular AI chats.
 
 ## Why?
 
-A Claude Code session can quickly spread across several threads, fixes, and decisions. Without a recap, it is easy to lose track: what was done, in what order, what is still open.
+An AI coding session can quickly spread across several threads, fixes, and decisions. Without a recap, it is easy to lose track: what was done, in what order, what is still open.
 
 Session Recap reads back the current conversation and produces a structured summary, so you can pick the work back up quickly, in the current session or the next one.
 
@@ -21,15 +25,18 @@ Session Recap is useful when you want to:
 
 ## How to use it
 
-In a Claude Code session, type:
+Once installed, trigger it with the form native to your tool:
 
-```txt
-/session-recap
-```
+| Where | Trigger |
+| --- | --- |
+| Claude Code | `/session-recap` |
+| Codex | `$session-recap` |
+| Other AI coding assistants | the form created at install time |
+| Regular AI chat | paste the chat version into the conversation |
 
-## What the command does
+## What Session Recap produces
 
-The command covers the work done since the last recap generated in the conversation, or otherwise since the start of the conversation. It does not summarize the full project history, and it does not invent actions, decisions, or timestamps.
+Session Recap covers the work done since the last recap generated in the conversation, or otherwise since the start of the conversation. It does not summarize the full project history, and it does not invent actions, decisions, or timestamps.
 
 It produces four sections:
 
@@ -40,29 +47,105 @@ It produces four sections:
 
 For a long session, the recap groups related actions into meaningful topics instead of logging everything: trivial commands, inconsequential exploration, and abandoned attempts with no impact are ignored.
 
-## How is this different from `/recap`?
+## How is this different from built-in recaps?
 
-Claude Code's built-in `/recap` gives a brief summary when you return to a session.
+Claude Code has a built-in `/recap` that produces a one-line recap, either on demand or automatically when you come back after being away for a few minutes; it can be turned off in `/config`.
 
-Session Recap goes deeper: a full chronological breakdown, a project status table, and a next step, always in the same four sections.
+Codex has no session-recap command. The closest features serve a different purpose: `/compact` summarizes the conversation to stay under the context limit, and `/memories` distills sessions into long-term memory for future runs. Neither is meant to hand you a readable account of the session you just worked through.
+
+Session Recap goes deeper, and behaves the same way in every tool: a full chronological breakdown, a project status table, and a next step, always in the same four sections.
 
 ## Limitations
 
 Session Recap does not modify any project file: it only produces recap text.
 
-The recap is based solely on the context actually available in the current Claude Code conversation. It has no knowledge of past sessions that are not part of the current context, and it never invents a timestamp it cannot determine reliably.
+The recap is based solely on the context actually available in the current conversation. It has no knowledge of past sessions that are not part of the current context, and it never invents a timestamp it cannot determine reliably.
+
+## FAQ
+
+**Does a recap carry over to a new conversation or chat?**
+No. Everything is scoped to the current conversation, from its start or from the last recap generated inside it. Session Recap itself writes nothing to disk and shares nothing between conversations; a new chat starts from zero.
+
+**Can I ask for a recap several times in the same session?**
+Yes. Each recap is scoped to what happened since the previous one generated in that conversation, so recaps are not meant to overlap or repeat.
+
+**What happens if the session is very long?**
+The recap adapts its granularity: instead of logging everything, it groups related actions into roughly 8 to 12 meaningful topics and ignores trivial commands, inconsequential exploration, and abandoned attempts with no impact.
+
+**What if part of the conversation was compacted or dropped from context (e.g. with `/compact`)?**
+The recap can only work from what is actually present in the current context. If earlier parts of the conversation were compacted or fell out of context, they can't be reflected in the recap.
+
+**Does it modify any files?**
+No. Session Recap only produces recap text; it never edits, creates, or deletes project files.
+
+**What if a timestamp can't be determined reliably?**
+The cell is left empty. Session Recap is instructed to never invent a time it cannot determine from the conversation, so in practice the `Time` column can be partly or entirely empty depending on what the conversation exposes.
+
+**What language is the recap in?**
+The language you're using in the conversation; section headers and labels are translated accordingly.
 
 ## Install in Claude Code
 
-### Method 1: copy the command file
+### Method 1: let Claude Code install it
 
-Copy [session-recap.md](.claude/commands/session-recap.md) into your project's `.claude/commands/` folder.
-
-### Method 2: install using Claude Code
-
-You can ask Claude Code to handle the installation for you. Paste this prompt in a Claude Code session:
+Paste this prompt in a Claude Code session:
 
 [install-session-recap-for-claude-code.md](prompts-for-installation/install-session-recap-for-claude-code.md)
+
+Claude Code asks where to install the command, then creates it. Prefer the global install: Session Recap is a way of working, not project-specific content, so it is worth having in every session.
+
+Then use it with:
+
+```txt
+/session-recap
+```
+
+### Method 2: manual
+
+Copy [session-recap.md](.claude/commands/session-recap.md) into `~/.claude/commands/` for all your sessions, or into your project's `.claude/commands/` folder to version it with the repository.
+
+## Install and use in Codex
+
+Session Recap ships as a native Codex skill in [`.agents/skills/session-recap`](.agents/skills/session-recap).
+
+### Method 1: let Codex install it
+
+Paste this prompt in a Codex session:
+
+[install-session-recap-for-codex.md](prompts-for-installation/install-session-recap-for-codex.md)
+
+Codex asks whether to install the skill globally or in the current project only, then creates it. The global install is recommended so Session Recap is available in every project.
+
+Restart Codex or open a new chat, then invoke the skill:
+
+```txt
+$session-recap
+```
+
+Codex reserves root slash commands and does not support a custom `/session-recap` alias. `$session-recap` is the native reusable form and works across projects.
+
+### Method 2: manual
+
+Clone this repository, then link the skill into your user-level skills folder:
+
+```sh
+mkdir -p "$HOME/.agents/skills"
+ln -s "$PWD/.agents/skills/session-recap" "$HOME/.agents/skills/session-recap"
+```
+
+Codex also discovers user skills under `~/.codex/skills`, but that location is deprecated and kept only for backward compatibility.
+
+For a project-only install, `.agents/skills/session-recap` is already picked up when you work inside this repository.
+
+A legacy custom-prompt file is also kept in [`.codex/prompts/session-recap.md`](.codex/prompts/session-recap.md) for older Codex versions that loaded reusable prompts from `~/.codex/prompts`. On recent versions, use the skill.
+
+## Using with other AI assistants
+
+This repo is designed primarily for Claude Code and Codex. The same behavior can be reproduced with other AI assistants using the instructions in:
+
+[install-session-recap-for-any-ai.md](prompts-for-installation/install-session-recap-for-any-ai.md)
+
+Paste these instructions into the target assistant to let it recreate the Session Recap behavior in its own supported format. If the assistant supports a user-level location, it asks whether to install Session Recap globally or in the current project only.
 
 ## Use in a regular AI chat (ChatGPT, Claude, Gemini...)
 
@@ -81,11 +164,30 @@ session-recap/
 ├── README.md
 ├── LICENSE
 ├── .gitignore
+├── .agents/
+│   └── skills/
+│       └── session-recap/
+│           ├── SKILL.md
+│           └── agents/
+│               └── openai.yaml
+├── .codex/
+│   └── prompts/
+│       └── session-recap.md
 ├── .claude/
 │   └── commands/
 │       └── session-recap.md
 ├── prompts-for-installation/
-│   └── install-session-recap-for-claude-code.md
-└── prompts-for-ai-chat/
-    └── session-recap-ai-chat-version.md
+│   ├── install-session-recap-for-claude-code.md
+│   ├── install-session-recap-for-codex.md
+│   └── install-session-recap-for-any-ai.md
+├── prompts-for-ai-chat/
+│   └── session-recap-ai-chat-version.md
+└── public/
+    ├── session-recap.png
+    ├── session-recap.gif
+    └── session-recap.mp4
 ```
+
+## License
+
+MIT — see [LICENSE](LICENSE).
