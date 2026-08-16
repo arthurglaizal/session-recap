@@ -18,14 +18,20 @@ Produce exactly these sections, in this order, in Markdown.
 
 **`Session Summary`**: exactly 2 sentences giving an overview: the main threads of work, the most important changes or decisions, and the overall state reached by the end of the session.
 
-**`Session Timeline`**: a Markdown table `| # | Topic | What was done | Time |`, in chronological order, one row per meaningful topic (about 8 to 12 for a long session), each topic titled in **bold**, with short bullet points in `What was done` each prefixed with `• ` and kept on a single line, and the topic's start time in *italics* as `HH:MM` in the last column. Never invent a time; leave the cell empty if it cannot be determined reliably.
+**`Session Timeline`**: a Markdown table `| # | Topic | What was done | Time |`, in chronological order, one row per meaningful topic (about 8 to 12 for a long session), each topic titled in **bold**, with the actions listed inside `What was done` on one single line each introduced by `• ` (see `Table cell formatting` below), and the topic's start time in *italics* as `HH:MM` in the last column. Never invent a time; leave the cell empty if it cannot be determined reliably.
 
-**`Where the project stands`**: a Markdown table `| Status | State |` with exactly three rows, `✅ **Done**`, `🚧 **In progress**`, `❓ **Open questions**`, each with short bullet points in the `State` cell, prefixed with `• ` and kept on a single line. Use `—` instead of inventing content for a category that is not relevant.
+**`Where the project stands`**: a Markdown table `| Status | State |` with exactly three rows, `✅ **Done**`, `🚧 **In progress**`, `❓ **Open questions**`, each `State` cell following the same `Table cell formatting` rule: one single line, items introduced by `• `. Use `—` instead of inventing content for a category that is not relevant.
 
 **`👉 Next step`**: outside the table, exactly one line, `👉 **Next step**: ...`, a single sentence on the most logical action to take immediately next.
 
 Reply in the language used in the conversation, translating the section headers and labels accordingly.
 
-Never use HTML tags such as `<br>` anywhere in the output: they are not rendered in the terminal and show up as raw text. A table cell must stay on a single line, with `• ` as the only bullet separator.
+**Table cell formatting**: this applies to every table in the output. A cell is **always one single line of text**. Items inside a cell are separated by `• ` and nothing else: no line break, no `\n`, no HTML tag. The terminal renders table cells as plain text, so any tag appears literally in the output. Write a multi-item cell exactly like this:
+
+```
+| 1 | **Network guard** | • NETWORK_DELAY raised from 120 to 300 s • Comment rewritten to justify the two pauses • Edit made before launch | *10:32* |
+```
+
+Keep each item short so the line stays readable once it wraps. Never use an HTML tag anywhere in the output; before returning the recap, check that no `<` character remains in any table cell.
 
 Do not modify any project file, and do not propose an action plan or task list beyond `Next step`.
