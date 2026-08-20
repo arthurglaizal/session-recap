@@ -1,19 +1,59 @@
-Create a reusable Codex skill called **Session Recap**.
+Install a reusable **Session Recap** skill in Codex.
 
-Goal: install a `$session-recap` skill (with a legacy `/prompts:session-recap` compatibility prompt) that generates a readable recap of the current work session (summary, chronological timeline, project status, next step), based only on what actually happened since the last recap or since the start of the conversation.
+Goal: make a `session-recap` skill available in Codex, so that on demand you generate a readable recap of the current work session (summary, chronological timeline, project status, next step), based only on what actually happened since the last recap or since the start of the conversation.
 
-To do:
+**Important — do not rely on memory for paths or file formats.** Codex changes its skill folders, file layout, and metadata over time, and some locations that used to be recommended are now kept only for backward compatibility. Everything about *where* and *how* to install must be resolved now, from the official documentation and from my machine, not from what you already believe to be true. Treat any path you remember as a hypothesis to verify, never as a fact.
 
-1. Before creating anything, ask me where to install the skill:
+Follow the steps below in order.
 
-   * **Global (recommended)**: `~/.codex/skills/session-recap/`, available in all my Codex sessions and projects.
-   * **Project only**: `.agents/skills/session-recap/`, versioned with this repository and shared with my team.
+## Step 1 — Ask me where to install it
 
-   Wait for my answer before continuing. If I pick the global install, tell me that writing outside the workspace is not allowed by the default sandbox and will require an approval.
+Ask me one question and stop:
 
-2. Create the `agents/` subfolder inside the location I chose, if it does not already exist.
-3. Create the `SKILL.md` file at the root of that location.
-4. Put exactly the following content inside the file:
+* **Personal / global (recommended)**: available in all my Codex sessions, in every project. Session Recap is a way of working, not project-specific content.
+* **Project only**: stored inside this repository, versioned with it and shared with my team.
+
+Wait for my answer. Do not create, move, download, or write anything before I reply.
+
+## Step 2 — Determine the current, official format and location
+
+Once I have answered, and before writing anything:
+
+1. Consult the current official Codex documentation about skills — the file layout expected today, the required front matter, any companion metadata file, and the directories Codex discovers skills from for each scope (personal/user, repository/project, and any other). Note explicitly which locations are current and which are only kept for backward compatibility.
+2. Inspect my local environment: which Codex version is installed, which of the documented directories already exist on this machine, whether a `CODEX_HOME` or equivalent variable redirects them, and whether Codex now provides a built-in skill or helper that creates a skill for me. If such a helper exists and is the recommended path, prefer it.
+3. From those two sources combined, decide:
+   * the **modern recommended skill format**, including every file it requires;
+   * the **exact location** matching the scope I chose — the current one, never a deprecated one.
+
+If the documentation and my installed version disagree, prefer what my installed version actually supports, and tell me about the difference in one sentence.
+
+If you cannot confirm something from the official documentation, say so plainly instead of guessing.
+
+## Step 3 — Show me the resolved path before writing anything
+
+Print, in a few lines:
+
+* the format you selected and why it is the current recommended one;
+* the exact, fully expanded path of every file you are about to create;
+* whether that path is outside this workspace, and if so, that the default sandbox does not allow writing there and that it will require my approval.
+
+Then wait for my confirmation before creating anything.
+
+## Step 4 — Check whether it is already installed
+
+Before writing, check the resolved location — and any deprecated location you identified in step 2 — for an existing installation, including the case where it is a symbolic link, whether that link is valid or broken (pointing at something that no longer exists).
+
+* If nothing is there, continue.
+* If a valid symbolic link already points at a working Session Recap installation, such as a local clone of the Session Recap repository, do not touch it: tell me it is already installed and stop.
+* If a broken symbolic link is there, tell me, and ask whether to replace it.
+* If real files are already there, **do not overwrite them**. Show me what differs between the existing content and the content below, then ask me whether to replace, keep, or merge.
+* If you find an installation only in a deprecated location, tell me, and ask whether to install in the current location and leave the old one alone.
+
+## Step 5 — Create the files
+
+Create only what the current format actually requires: the skill file itself, plus any metadata or companion file the format defines today. Create the containing folders if they do not exist.
+
+The behavior below is the content of the skill, and must be preserved exactly:
 
 ````md
 ---
@@ -106,8 +146,7 @@ Reply in the language the user is using in the conversation, translating the sec
 * Stay concise and directly readable in the terminal.
 ````
 
-5. Create the `agents/openai.yaml` file inside the same location.
-6. Put exactly the following content inside the file:
+Session Recap is meant to run only when I ask for it, never on its own initiative. If the current format supports a companion metadata file for the display name and invocation policy, create it with this intent:
 
 ```yaml
 interface:
@@ -118,28 +157,29 @@ policy:
   allow_implicit_invocation: false
 ```
 
-Optional legacy compatibility:
+Adapting the packaging is allowed; changing the behavior is not:
 
-If I also want the deprecated custom-prompt mechanism, create `session-recap.md` with the same behavior, in `~/.codex/prompts/` for a global install or in `.codex/prompts/` for a project install, using this front matter and keeping the same body as the `SKILL.md` content above (without the `name`/`description` frontmatter fields):
+* If the current front matter or metadata schema expects different field names, or requires additional fields, adapt the keys and file names to match — keep the values and the intent identical.
+* If the current explicit invocation syntax is not `$session-recap`, update the mentions of it in the description and in the metadata so they match reality. Change nothing else.
+* Keep the name `session-recap`, so that it stays recognizable.
 
-```md
----
-description: Recap the current work session in a consistent, structured format
----
-```
+**Do not create any older, superseded format by default** — no deprecated skill directory, and no legacy custom-prompt file. If I explicitly ask for backward compatibility, you may add it afterwards, but only after confirming from the official documentation that the older mechanism is still supported by my version, and only as a clearly labelled optional extra. If it is no longer supported, tell me instead of creating it.
 
-Constraints:
+## Step 6 — Validate and report
 
-* Do not modify any other file.
-* Do not rename existing skills or prompts.
+Check that the installation is actually picked up: confirm the files exist where you said, that the front matter and any metadata parse correctly, and — if Codex offers a way to list available skills — that `session-recap` now appears in it.
+
+Then tell me, in a few lines:
+
+* the exact files created, and whether the install is personal/global or project-scoped;
+* how to trigger Session Recap, with the exact syntax my version expects;
+* whether I need to restart Codex or start a new conversation for the skill to be detected;
+* anything you could not confirm from the official documentation.
+
+## Constraints
+
+* Do not modify any other file in this project.
+* Do not rename or delete existing skills or prompts.
 * Do not add dependencies.
-* Do not change project configuration.
-* Keep the skill files simple and readable.
-* If `~/.codex/skills/session-recap` already exists as a symlink to a local clone of the Session Recap repository, do not overwrite it: tell me it is already installed globally.
-
-At the end, simply tell me:
-
-* the files created and whether the install is global or project-scoped;
-* how to invoke the skill in Codex, for example: `$session-recap`;
-* that a new chat or a Codex restart may be needed for the skill to be detected;
-* that Codex reserves root slash commands, so there is no custom `/session-recap` alias, and the deprecated prompt form would be `/prompts:session-recap`.
+* Do not change my Codex configuration unless the current format strictly requires it — and if it does, tell me before doing it.
+* Keep the created files simple and readable.

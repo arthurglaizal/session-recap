@@ -1,19 +1,58 @@
-Create a reusable Claude Code command in this project called **Session Recap**.
+Install a reusable **Session Recap** capability in Claude Code.
 
-Goal: install a `/session-recap` command that generates a readable recap of the current work session (summary, chronological timeline, project status, next step), based only on what actually happened since the last recap or since the start of the conversation.
+Goal: make a `session-recap` instruction available in Claude Code, so that on demand you generate a readable recap of the current work session (summary, chronological timeline, project status, next step), based only on what actually happened since the last recap or since the start of the conversation.
 
-To do:
+**Important — do not rely on memory for paths or file formats.** Claude Code changes its file formats, folder names, and metadata over time. Everything about *where* and *how* to install must be resolved now, from the official documentation and from my machine, not from what you already believe to be true. Treat any path you remember as a hypothesis to verify, never as a fact.
 
-1. Before creating anything, ask me where to install the command:
+Follow the steps below in order.
 
-   * **Global (recommended)**: `~/.claude/commands/session-recap.md`, available in all my Claude Code sessions.
-   * **Project only**: `.claude/commands/session-recap.md`, versioned with this repository and shared with my team.
+## Step 1 — Ask me where to install it
 
-   Wait for my answer before continuing. If I pick the global install, tell me that writing outside the project may trigger a permission prompt.
+Ask me one question and stop:
 
-2. Create the target folder if it does not already exist.
-3. Create the command file at the location I chose.
-4. Put exactly the following content inside the file:
+* **Personal / global (recommended)**: available in all my Claude Code sessions, in every project. Session Recap is a way of working, not project-specific content.
+* **Project only**: stored inside this repository, versioned with it and shared with my team.
+
+Wait for my answer. Do not create, move, download, or write anything before I reply.
+
+## Step 2 — Determine the current, official format and location
+
+Once I have answered, and before writing anything:
+
+1. Consult the current official Claude Code documentation about reusable instructions — what the modern mechanism is called today, the file layout it expects, the metadata or front matter it requires, and the locations it is discovered from for each scope (personal/global, project, and any other).
+2. Inspect my local environment: which Claude Code version is installed, which of the documented locations already exist on this machine, and whether Claude Code now provides a built-in command or helper that creates this kind of file for me. If such a helper exists and is the recommended path, prefer it.
+3. From those two sources combined, decide:
+   * the **modern recommended format** for this kind of reusable instruction;
+   * the **exact location** matching the scope I chose.
+
+If the documentation and my installed version disagree, prefer what my installed version actually supports, and tell me about the difference in one sentence.
+
+If you cannot confirm something from the official documentation, say so plainly instead of guessing.
+
+## Step 3 — Show me the resolved path before writing anything
+
+Print, in a few lines:
+
+* the format you selected and why it is the current recommended one;
+* the exact, fully expanded path of every file you are about to create;
+* whether that path is outside this project, and if so, that writing there may require my approval or trigger a permission prompt.
+
+Then wait for my confirmation before creating anything.
+
+## Step 4 — Check whether it is already installed
+
+Before writing, check the resolved location for an existing installation, including the case where it is a symbolic link — whether that link is valid or broken (pointing at something that no longer exists).
+
+* If nothing is there, continue.
+* If a valid symbolic link already points at a working Session Recap installation, do not touch it: tell me it is already installed and stop.
+* If a broken symbolic link is there, tell me, and ask whether to replace it.
+* If real files are already there, **do not overwrite them**. Show me what differs between the existing content and the content below, then ask me whether to replace, keep, or merge.
+
+## Step 5 — Create the files
+
+Create only what the current format actually requires: the instruction file itself, plus any metadata or companion file the format defines today. Create the containing folders if they do not exist.
+
+The behavior below is the content of the instruction, and must be preserved exactly:
 
 ````md
 Generate a readable recap of the current Claude Code work session.
@@ -67,7 +106,7 @@ Write a multi-item cell exactly like this:
 | 1 | **Network guard** | • NETWORK_DELAY raised from 120 to 300 s • Comment rewritten to justify the two pauses • Edit made before launch | *10:32* |
 ```
 
-Keep each item short so the line stays readable once the line wraps.
+Keep each item short so the line stays readable once the terminal wraps it.
 
 ### `Where the project stands`
 
@@ -99,15 +138,30 @@ Reply in the language the user is using in the conversation, translating the sec
 * Stay concise and directly readable in Claude Code.
 ````
 
-Constraints:
+Adapting the packaging is allowed; changing the behavior is not:
 
-* Do not modify any other file.
-* Do not rename existing commands.
+* Wrap this text in whatever the current format requires. If it expects front matter or metadata, add it, and use this as the description of what it does and when to use it: *"Generate a readable recap of the current Claude Code work session — summary, chronological timeline, project status, and next step — scoped to what happened since the last recap or since the start of the conversation. Use when the user asks to recap the session, or wants to know where things stand and what to pick up next."*
+* If the current format calls this a *skill* rather than a *command*, replace the two self-references (`this command`) with the matching word. Change nothing else.
+* If the current invocation syntax is not `/session-recap`, adjust only the wording that names it.
+* Keep the name `session-recap`, so that it stays recognizable.
+
+**Do not create any older, superseded format by default.** If Claude Code still supports an earlier mechanism and I explicitly ask for it, you may add it afterwards as a clearly labelled optional extra, and only after confirming from the documentation that it is still supported.
+
+## Step 6 — Validate and report
+
+Check that the installation is actually picked up: confirm the files exist where you said, that any required metadata is valid, and — if Claude Code offers a way to list available instructions — that `session-recap` now appears in it.
+
+Then tell me, in a few lines:
+
+* the exact files created, and whether the install is personal/global or project-scoped;
+* how to trigger Session Recap, with the exact syntax my version expects;
+* whether I need to restart Claude Code or start a new conversation for it to be detected;
+* anything you could not confirm from the official documentation.
+
+## Constraints
+
+* Do not modify any other file in this project.
+* Do not rename or delete existing instructions, commands, or skills.
 * Do not add dependencies.
-* Do not change project configuration.
-* Keep the command file simple and readable.
-
-At the end, simply tell me:
-
-* the file created and whether the install is global or project-scoped;
-* how to use the command in Claude Code, for example: `/session-recap`.
+* Do not change my Claude Code configuration unless the current format strictly requires it — and if it does, tell me before doing it.
+* Keep the created files simple and readable.

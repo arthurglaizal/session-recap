@@ -92,7 +92,7 @@ Paste this prompt in a Claude Code session:
 
 [install-session-recap-for-claude-code.md](prompts-for-installation/install-session-recap-for-claude-code.md)
 
-Claude Code asks where to install the command, then creates it. Prefer the global install: Session Recap is a way of working, not project-specific content, so it is worth having in every session.
+Claude Code asks whether to install it globally or in this project only, checks which format and location your version expects today, shows you the resolved path, then creates the files. Prefer the global install: Session Recap is a way of working, not project-specific content, so it is worth having in every session.
 
 Then use it with:
 
@@ -102,7 +102,14 @@ Then use it with:
 
 ### Method 2: manual
 
-Copy [session-recap.md](.claude/commands/session-recap.md) into `~/.claude/commands/` for all your sessions, or into your project's `.claude/commands/` folder to version it with the repository.
+Claude Code has merged custom commands into skills: a file at `.claude/commands/session-recap.md` and a skill at `.claude/skills/session-recap/SKILL.md` both create `/session-recap` and behave the same way.
+
+Copy [session-recap.md](.claude/commands/session-recap.md) into either location:
+
+* **As a skill (current format)** — save it as `SKILL.md` inside `~/.claude/skills/session-recap/` for all your sessions, or inside your project's `.claude/skills/session-recap/` to version it with the repository.
+* **As a command (still supported)** — drop the file as-is into `~/.claude/commands/`, or into your project's `.claude/commands/` folder.
+
+Claude Code watches these folders and picks the change up without a restart. Only if the top-level skills folder did not exist when your session started do you need to restart Claude Code.
 
 ## Install and use in Codex
 
@@ -114,7 +121,7 @@ Paste this prompt in a Codex session:
 
 [install-session-recap-for-codex.md](prompts-for-installation/install-session-recap-for-codex.md)
 
-Codex asks whether to install the skill globally or in the current project only, then creates it. The global install is recommended so Session Recap is available in every project.
+Codex asks whether to install the skill globally or in the current project only, checks which format and location your version expects today, shows you the resolved path, then creates the files. The global install is recommended so Session Recap is available in every project.
 
 Restart Codex or open a new chat, then invoke the skill:
 
@@ -137,7 +144,7 @@ Codex also discovers user skills under `~/.codex/skills`, but that location is d
 
 For a project-only install, `.agents/skills/session-recap` is already picked up when you work inside this repository.
 
-A legacy custom-prompt file is also kept in [`.codex/prompts/session-recap.md`](.codex/prompts/session-recap.md) for older Codex versions that loaded reusable prompts from `~/.codex/prompts`. On recent versions, use the skill.
+A legacy custom-prompt file is also kept in [`.codex/prompts/session-recap.md`](.codex/prompts/session-recap.md) for older Codex versions that loaded reusable prompts from `~/.codex/prompts`. Recent versions no longer expose that mechanism, so use the skill.
 
 ## Using with other AI assistants
 
