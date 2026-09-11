@@ -195,6 +195,16 @@ session-recap/
     └── session-recap.mp4
 ```
 
+## More AI workflow commands
+
+Small, portable commands for Claude Code, Codex, and any AI assistant.
+
+| Command | What it does |
+| --- | --- |
+| [WaitGo](https://github.com/arthurglaizal/wait-go) | Batches your instructions, then executes only when you say go. |
+| [Noob Command](https://github.com/arthurglaizal/noob-command) | Rewrites the last AI answer in simple, concise language. |
+| [Ask Mode](https://github.com/arthurglaizal/ask-mode) | Lets you question your codebase without the assistant changing anything. |
+
 ## Support
 If you find my work useful, you can [buy me a coffee](https://ko-fi.com/arturo_ux) ☕️
 
