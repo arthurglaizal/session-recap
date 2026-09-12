@@ -47,6 +47,12 @@ It produces four sections:
 
 For a long session, the recap groups related actions into meaningful topics instead of logging everything: trivial commands, inconsequential exploration, and abandoned attempts with no impact are ignored.
 
+## Example output
+
+Here is a realistic example generated after improving the filters in a web dashboard: [Dashboard filters session recap](examples/dashboard-filters-session-recap.md).
+
+It shows the complete output format: a two-sentence summary, a chronological timeline, the current project status, and one clear next step.
+
 ## How is this different from built-in recaps?
 
 Claude Code has a built-in `/recap` that produces a one-line recap, either on demand or automatically when you come back after being away for a few minutes; it can be turned off in `/config`.
@@ -183,6 +189,8 @@ session-recap/
 ├── .claude/
 │   └── commands/
 │       └── session-recap.md
+├── examples/
+│   └── dashboard-filters-session-recap.md
 ├── prompts-for-installation/
 │   ├── install-session-recap-for-claude-code.md
 │   ├── install-session-recap-for-codex.md
@@ -202,6 +210,7 @@ Small, portable commands for Claude Code, Codex, and any AI assistant.
 | Command | What it does |
 | --- | --- |
 | [WaitGo](https://github.com/arthurglaizal/wait-go) | Batches your instructions, then executes only when you say go. |
+| [AI Handoff](https://github.com/arthurglaizal/ai-handoff) | Packages the current context so another AI can continue the work. |
 | [Noob Command](https://github.com/arthurglaizal/noob-command) | Rewrites the last AI answer in simple, concise language. |
 | [Ask Mode](https://github.com/arthurglaizal/ask-mode) | Lets you question your codebase without the assistant changing anything. |
 
