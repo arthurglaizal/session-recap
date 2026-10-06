@@ -108,12 +108,16 @@ Then use it with:
 
 ### Method 2: manual
 
-Claude Code has merged custom commands into skills: a file at `.claude/commands/session-recap.md` and a skill at `.claude/skills/session-recap/SKILL.md` both create `/session-recap` and behave the same way.
+Clone this repository, enter it, then link the skill into your personal skills folder:
 
-Copy [session-recap.md](.claude/commands/session-recap.md) into either location:
+```sh
+git clone https://github.com/arthurglaizal/session-recap.git
+cd session-recap
+mkdir -p "$HOME/.claude/skills"
+ln -s "$PWD/.claude/skills/session-recap" "$HOME/.claude/skills/session-recap"
+```
 
-* **As a skill (current format)** — save it as `SKILL.md` inside `~/.claude/skills/session-recap/` for all your sessions, or inside your project's `.claude/skills/session-recap/` to version it with the repository.
-* **As a command (still supported)** — drop the file as-is into `~/.claude/commands/`, or into your project's `.claude/commands/` folder.
+For a project-only install, copy the [`.claude/skills/session-recap`](.claude/skills/session-recap) folder into your project's `.claude/skills/` folder instead.
 
 Claude Code watches these folders and picks the change up without a restart. Only if the top-level skills folder did not exist when your session started do you need to restart Claude Code.
 
@@ -187,8 +191,9 @@ session-recap/
 │   └── prompts/
 │       └── session-recap.md
 ├── .claude/
-│   └── commands/
-│       └── session-recap.md
+│   └── skills/
+│       └── session-recap/
+│           └── SKILL.md
 ├── examples/
 │   └── dashboard-filters-session-recap.md
 ├── prompts-for-installation/
