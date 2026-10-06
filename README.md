@@ -4,7 +4,7 @@
 
 > **Recap your AI coding session at a glance.**
 
-Session Recap is a minimal reusable command that generates a readable recap of the current work session: what was done, in what order, where the project stands, and what to pick up next time.
+Session Recap is a minimal reusable skill that generates a readable recap of the current work session: what was done, in what order, where the project stands, and what to pick up next time.
 
 It works in Claude Code, in Codex, in other AI coding assistants, and in regular AI chats.
 
@@ -57,7 +57,7 @@ It shows the complete output format: a two-sentence summary, a chronological tim
 
 Claude Code has a built-in `/recap` that produces a one-line recap, either on demand or automatically when you come back after being away for a few minutes; it can be turned off in `/config`.
 
-Codex has no session-recap command. The closest features serve a different purpose: `/compact` summarizes the conversation to stay under the context limit, and `/memories` distills sessions into long-term memory for future runs. Neither is meant to hand you a readable account of the session you just worked through.
+Codex has no built-in session recap. The closest features serve a different purpose: `/compact` summarizes the conversation to stay under the context limit, and `/memories` distills sessions into long-term memory for future runs. Neither is meant to hand you a readable account of the session you just worked through.
 
 Session Recap goes deeper, and behaves the same way in every tool: a full chronological breakdown, a project status table, and a next step, always in the same four sections.
 
@@ -208,17 +208,17 @@ session-recap/
     └── session-recap.mp4
 ```
 
-## More AI workflow commands
+## More AI workflow skills
 
-Small, portable commands for Claude Code, Codex, and any AI assistant.
+Small, portable skills for Claude Code, Codex, and any AI assistant.
 
-| Command | What it does |
+| Skill | What it does |
 | --- | --- |
 | [WaitGo](https://github.com/arthurglaizal/wait-go) | Batches your instructions, then executes only when you say go. |
-| [AI Handoff](https://github.com/arthurglaizal/ai-handoff) | Packages the current context so another AI can continue the work. |
-| [Noob Command](https://github.com/arthurglaizal/noob-command) | Rewrites the last AI answer in simple, concise language. |
+| [Noob](https://github.com/arthurglaizal/noob) | Rewrites the last AI answer in simple, concise language. |
 | [Ask Mode](https://github.com/arthurglaizal/ask-mode) | Lets you question your codebase without the assistant changing anything. |
-| [FYI](https://github.com/arthurglaizal/fyi-command) | Gives your assistant context without giving it a task. |
+| [AI Handoff](https://github.com/arthurglaizal/ai-handoff) | Packages the current context so another AI can continue the work. |
+| [FYI](https://github.com/arthurglaizal/fyi) | Gives your assistant context without giving it a task. |
 
 ## Support
 If you find my work useful, you can [buy me a coffee](https://ko-fi.com/arturo_ux) ☕️
