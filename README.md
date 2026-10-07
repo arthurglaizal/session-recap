@@ -216,9 +216,9 @@ Small, portable commands for Claude Code, Codex, and any AI assistant.
 | --- | --- |
 | [WaitGo](https://github.com/arthurglaizal/wait-go) | Batches your instructions, then executes only when you say go. |
 | [AI Handoff](https://github.com/arthurglaizal/ai-handoff) | Packages the current context so another AI can continue the work. |
-| [Noob Command](https://github.com/arthurglaizal/noob-command) | Rewrites the last AI answer in simple, concise language. |
+| [Noob](https://github.com/arthurglaizal/noob) | Rewrites the last AI answer in simple, concise language. |
 | [Ask Mode](https://github.com/arthurglaizal/ask-mode) | Lets you question your codebase without the assistant changing anything. |
-| [FYI](https://github.com/arthurglaizal/fyi-command) | Gives your assistant context without giving it a task. |
+| [FYI](https://github.com/arthurglaizal/fyi) | Gives your assistant context without giving it a task. |
 
 ## Support
 If you find my work useful, you can [buy me a coffee](https://ko-fi.com/arturo_ux) ☕️
